@@ -28,7 +28,7 @@ $ go get github.com/disiqueira/itios
 ```go
 r := itinerary.NewRouter()
 
-r.NewPath(ChromeHandler).AddMatcher(itios.New("Chrome")) //Match if the request is made using a Chrome Browser
+r.NewPath(LinuxHandler).AddMatcher(itios.New("Linux")) //Match if the request is made using Linux
 ```
 
 ## Full Example
@@ -37,24 +37,19 @@ r.NewPath(ChromeHandler).AddMatcher(itios.New("Chrome")) //Match if the request 
 package main
 
 import (
-	"github.com/disiqueira/itios"
 	"github.com/disiqueira/itinerary"
+	"github.com/disiqueira/itios"
 	"net/http"
 )
 
-func ChromeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("You are using Chrome! :)"))
-}
-
-func IEHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("You are using Internet Explorer :( "))
+func LinuxHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("You are using Linux :) "))
 }
 
 func main() {
 	r := itinerary.NewRouter()
 
-	r.NewPath(ChromeHandler).AddMatcher(itios.New("Chrome"))
-	r.NewPath(IEHandler).AddMatcher(itios.New("Internet Explorer"))
+	r.NewPath(LinuxHandler).AddMatcher(itios.New("Linux"))
 
 	http.ListenAndServe(":8000", r)
 }
